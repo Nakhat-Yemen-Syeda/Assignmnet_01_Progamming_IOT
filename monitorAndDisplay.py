@@ -1,29 +1,28 @@
+import json
 from sense_hat import SenseHat
+
+f=open('/home/pi/Desktop/config.json' ,'r')
+s=f.read()
+temp=json.loads(s)
 sense = SenseHat()
+t = sense.get_temperature()
+t = round(t, 1)
 
-# Define the colours red and green
-red = (255, 0, 0)
-green = (0, 255, 0)
+coldMax = temp["cold_max"]
+comfortableMin = temp["comfortable_min"]
+comfortableMax = temp["comfortable_max"]
+hotMin = temp["hot_min"]
 
-while True:
+r = (255,0,0)
+g = (0,255,0)
+b = (0,0,255)
+message = "Temperature: " + str(t)
 
-  # Take readings 
-  t = sense.get_temperature()
-  
-  # Round the values to one decimal place
-  t = round(t, 1)
-  
-  
-  # Create the message
-  # str() converts the value to a string so it can be concatenated
-  message = "Temperature: " + str(t)
-  
-  if t <=10 :
-    bg = blue
-  elif t >= 10 and t<=25:
-      bg=green
-  else:
-    bg = red
-  
-  # Display the scrolling message
-  sense.show_message(message, scroll_speed=0.05, back_colour=bg)
+if (t<=coldMax):
+    sense.show_message(message, scroll_speed=0.10, text_colour=b)
+    
+elif (t>comfortableMin) and (t<comfortableMax):
+    sense.show_message(message, scroll_speed=0.10, text_colour=g)
+    
+else:
+    sense.show_message(message, scroll_speed=0.10, text_colour=r)
