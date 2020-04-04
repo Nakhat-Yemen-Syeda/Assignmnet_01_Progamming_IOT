@@ -1,50 +1,81 @@
 from sense_hat import SenseHat
 from time import sleep
 
-sense = SenseHat()
+class Smiley:
+    
+    def __init__(self):
+        self.sense= SenseHat()
+        self.y = (255,255,0)
+        self.r = (255, 0, 0)
+        self.b = (0, 0, 0)
+        self.w = (255,255,255)
 
-y = (255, 255, 0) #Yellow
-b = (0, 0, 0) # Black
-p=(204,0,102)#pink
-r=(204,0,0)#red
+        self.image = [
+        self.y,self.y,self.y,self.y,self.y,self.y,self.y,self.y,
+        self.y,self.y,self.y,self.y,self.y,self.y,self.y,self.y,
+        self.y,self.y,self.y,self.y,self.y,self.y,self.y,self.y,
+        self.y,self.y,self.y,self.y,self.y,self.y,self.y,self.y,
+        self.y,self.y,self.y,self.y,self.y,self.y,self.y,self.y,
+        self.y,self.y,self.y,self.y,self.y,self.y,self.y,self.y,
+        self.y,self.y,self.y,self.y,self.y,self.y,self.y,self.y,
+        self.y,self.y,self.y,self.y,self.y,self.y,self.y,self.y
+        ]
+        self.sense.set_pixels(self.image)
 
-happy_emoji = [
-   p, p, p, p, p, p, p, p,
-   y, y, y, y, y, y, y, y,
-   y, b, b, y, y, b, b, y,
-   y, b, b, y, y, b, b, y,
-   y, y, y, y, y, y, y, y,
-   y, b, b, y, y, b, b, y,
-   y, y, y, b, b, y, y, y,
-   p, p, p, y, y, p, p, p
-]
-
-angry_emoji= [
-   y, y, y, y, y, y, y, y,
-   y, y, y, y, y, y, y, y,
-   y, r, r, y, y, r, r, y,
-   y, r, r, y, y, r, r, y,
-   y, y, y, y, y, y, y, y,
-   y, y, y, b, b, y, y, y,
-   y, y, b, y, y, b, y, y,
-   y, b, y, y, y, y, b, y
-]
-heart_emoji= [
-   b, r, y, y, y, y, r, b,
-   r, y, r, y, y, r, r, r,
-   r, y, y, r, r, y, y, r,
-   r, y, y, r, r, y, y, r,
-   r, y, y, y, y, y, y, r,
-   y, r, y, y, y, y, r, y,
-   y, y, r, y, y, r, y, y,
-   y, b, y, y, r, y, b, y
-]
-
+    def eyes(self):
+        self.sense.set_pixel(1,1,self.w)
+        self.sense.set_pixel(1,2,self.w)
+        self.sense.set_pixel(2,1,self.w)
+        self.sense.set_pixel(2,2,self.b)
+        self.sense.set_pixel(1,5,self.w)
+        self.sense.set_pixel(1,6,self.w)
+        self.sense.set_pixel(2,5,self.w)
+        self.sense.set_pixel(2,6,self.b)
+        
+    def smile(self):
+        self.sense.set_pixel(4,1,self.r)
+        self.sense.set_pixel(4,2,self.r)
+        self.sense.set_pixel(4,3,self.r)
+        self.sense.set_pixel(4,4,self.r)
+        self.sense.set_pixel(4,5,self.r)
+        self.sense.set_pixel(4,6,self.r)
+        self.sense.set_pixel(5,2,self.r)
+        self.sense.set_pixel(5,3,self.b)
+        self.sense.set_pixel(5,4,self.b)
+        self.sense.set_pixel(5,5,self.r)
+        self.sense.set_pixel(6,3,self.r)
+        self.sense.set_pixel(6,4,self.r)
+        
+    def sad(self):
+        self.sense.set_pixel(6,1,self.r)
+        self.sense.set_pixel(5,2,self.r)
+        self.sense.set_pixel(4,3,self.r)
+        self.sense.set_pixel(4,4,self.r)
+        self.sense.set_pixel(5,5,self.r)
+        self.sense.set_pixel(6,6,self.r)
+        
+    def haww(self):
+        self.sense.set_pixel(4,3,self.r)
+        self.sense.set_pixel(4,4,self.r)
+        self.sense.set_pixel(5,5,self.r)
+        self.sense.set_pixel(6,4,self.r)
+        self.sense.set_pixel(6,3,self.r)
+        self.sense.set_pixel(5,2,self.r)
+        self.sense.set_pixel(5,3,self.b)
+        self.sense.set_pixel(5,4,self.b)
+        
 
 while True:
-   sense.set_pixels(happy_emoji)
-   sleep(3)
-   sense.set_pixels(angry_emoji)
-   sleep(3)
-   sense.set_pixels(heart_emoji)
-   sleep(10)
+    s1 = Smiley()
+    s1.eyes()
+    s1.smile()
+    sleep(3)
+    s2 = Smiley()
+    s2.eyes()
+    s2.sad()
+    sleep(3)
+    s3 = Smiley()
+    s3.eyes()
+    s3.haww()
+    sleep(3) 
+    
